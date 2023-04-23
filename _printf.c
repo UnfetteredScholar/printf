@@ -2,6 +2,17 @@
 #include "main.h"
 
 /**
+ * is_specifier - checks if a character is a format specifier
+ * @f: the character
+ *
+ * Return: 1 if true, 0 if false
+ */
+int is_specifier(char f)
+{
+	return (f == 'c' || f == 's' || f == 'i' || f == 'd' || f == '%');
+}
+
+/**
  * _puts - prints a string to stdout
  * @s: the string
  *
@@ -33,25 +44,16 @@ int _printf(const char *format, ...)
 	{
 		f = format[i];
 		f2 = format[i + 1];
-		if (f == '%' && (f2 == 'c' || f2 == 's' || f2 == 'd' || f2 == 'i'))
+		if (f == '%' && is_specifier(f2))
 		{
-			switch (f2)
-			{
-				case 'c':
-					count += _putchar(va_arg(args, int));
-					break;
-				case 's':
-					count += _puts(va_arg(args, char *));
-					break;
-				case 'd':
-					count += print_int(va_arg(args, int));
-					break;
-				case 'i':
-					count += print_int(va_arg(args, int));
-					break;
-				default:
-					break;
-			}
+			if (f2 == 'c')
+				count += _putchar(va_arg(args, int));
+			else if (f2 == 's')
+				count += _puts(va_arg(args, char *));
+			else if (f2 == 'd' || f2 == 'i')
+				count += print_int(va_arg(args, int));
+			else if (f2 == '%')
+				count += _putchar('%');
 			i +=  2;
 		}
 		else
