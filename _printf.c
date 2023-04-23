@@ -24,13 +24,11 @@ int _puts(char *s)
  */
 int _printf(const char *format, ...)
 {
-	int i;
+	int i = 0;
 	va_list args;
 	char f, f2;
 
 	va_start(args, format);
-
-	i = 0;
 	while (format[i] != '\0')
 	{
 		f = format[i];
@@ -62,7 +60,6 @@ int _printf(const char *format, ...)
 			i++;
 		}
 	}
-
 	va_end(args);
 	return (1);
 }
