@@ -3,7 +3,9 @@
 
 int _putchar(char c);
 
-void print_int(int nu);
+int print_count_int(int n, int count);
+
+int print_int(int nu);
 
 int _puts(char *s);
 

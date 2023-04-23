@@ -24,7 +24,7 @@ int _puts(char *s)
  */
 int _printf(const char *format, ...)
 {
-	int i = 0;
+	int i = 0, count = 0;
 	va_list args;
 	char f, f2;
 
@@ -38,16 +38,16 @@ int _printf(const char *format, ...)
 			switch (f2)
 			{
 				case 'c':
-					_putchar(va_arg(args, int));
+					count += _putchar(va_arg(args, int));
 					break;
 				case 's':
-					_puts(va_arg(args, char *));
+					count += _puts(va_arg(args, char *));
 					break;
 				case 'd':
-					print_int(va_arg(args, int));
+					count += print_int(va_arg(args, int));
 					break;
 				case 'i':
-					print_int(va_arg(args, int));
+					count += print_int(va_arg(args, int));
 					break;
 				default:
 					break;
@@ -56,10 +56,10 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(format[i]);
-			i++;
+			_putchar(format[i++]);
+			count++;
 		}
 	}
 	va_end(args);
-	return (1);
+	return (count);
 }
