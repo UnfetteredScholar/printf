@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -22,7 +23,7 @@ int _puts(char *s)
 {
 	int i = 0;
 
-	while (s[i] != '\0')
+	while (s != NULL && s[i] != '\0')
 		_putchar(s[i++]);
 	return (i);
 }
@@ -40,7 +41,7 @@ int _printf(const char *format, ...)
 	char f, f2;
 
 	va_start(args, format);
-	while (format[i] != '\0')
+	while (format != NULL && format[i] != '\0')
 	{
 		f = format[i];
 		f2 = format[i + 1];
