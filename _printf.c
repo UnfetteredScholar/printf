@@ -10,22 +10,32 @@
  */
 int is_specifier(char f)
 {
-	return (f == 'c' || f == 's' || f == 'i' || f == 'd' || f == '%');
+	return (f == 'c' || f == 's' || f == 'i' || f == 'd' || f == 'b' || f == '%');
 }
 
 /**
- * _puts - prints a string to stdout
- * @s: the string
+ * process_specifier - processes a format specifier
+ * @f: the format character
+ * @args: pointer to the argument list
  *
  * Return: number of characters printed
  */
-int _puts(char *s)
+int process_specifier(char f, va_list *args)
 {
-	int i = 0;
+	int count = 0;
 
-	while (s != NULL && s[i] != '\0')
-		_putchar(s[i++]);
-	return (i);
+	if (f == 'c')
+		count = _putchar(va_arg(*args, int));
+	else if (f == 's')
+		count = _puts(va_arg(*args, char *));
+	else if (f == 'd' || f == 'i')
+		count = print_int(va_arg(*args, int));
+	else if (f == 'b')
+		count = print_uint_binary(va_arg(*args, unsigned int));
+	else if (f == '%')
+		count = _putchar('%');
+
+	return (count);
 }
 
 /**
@@ -47,14 +57,7 @@ int _printf(const char *format, ...)
 		f2 = format[i + 1];
 		if (f == '%' && is_specifier(f2))
 		{
-			if (f2 == 'c')
-				count += _putchar(va_arg(args, int));
-			else if (f2 == 's')
-				count += _puts(va_arg(args, char *));
-			else if (f2 == 'd' || f2 == 'i')
-				count += print_int(va_arg(args, int));
-			else if (f2 == '%')
-				count += _putchar('%');
+			count += process_specifier(f2, &args);
 			i +=  2;
 		}
 		else
