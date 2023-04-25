@@ -19,6 +19,8 @@ int print_base_x(unsigned int n, unsigned int x, int upper);
 
 int _puts(char *s);
 
+int _puts_special_char(char *s);
+
 int is_specifier(char c);
 
 int process_specifier(char f, va_list  *args);

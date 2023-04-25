@@ -10,7 +10,7 @@
  */
 int is_specifier(char f)
 {
-	return (f == 'c' || f == 's' || f == 'i' || f == 'd' || f == 'u' ||
+	return (f == 'c' || f == 's' || f == 'S' || f == 'i' || f == 'd' || f == 'u' ||
 		       	f == 'b' || f == 'o'|| f == 'x' || f == 'X' || f == '%');
 }
 
@@ -32,6 +32,10 @@ int process_specifier(char f, va_list *args)
 	else if (f == 's')
 	{
 		count = _puts(va_arg(*args, char *));
+	}
+	else if (f == 'S')
+	{
+		count = _puts_special_char(va_arg(*args, char *));
 	}
 	else if (f == 'd' || f == 'i')
 	{
