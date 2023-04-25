@@ -10,7 +10,8 @@
  */
 int is_specifier(char f)
 {
-	return (f == 'c' || f == 's' || f == 'i' || f == 'd' || f == 'b' || f == '%');
+	return (f == 'c' || f == 's' || f == 'i' || f == 'd' || f == 'u' ||
+		       	f == 'b' || f == 'o'|| f == 'x' || f == 'X' || f == '%');
 }
 
 /**
@@ -25,15 +26,25 @@ int process_specifier(char f, va_list *args)
 	int count = 0;
 
 	if (f == 'c')
+	{
 		count = _putchar(va_arg(*args, int));
+	}
 	else if (f == 's')
+	{
 		count = _puts(va_arg(*args, char *));
+	}
 	else if (f == 'd' || f == 'i')
+	{
 		count = print_int(va_arg(*args, int));
-	else if (f == 'b')
-		count = print_uint_binary(va_arg(*args, unsigned int));
+	}
+	else if (f == 'u' || f == 'b' || f == 'o' || f == 'x' || f == 'X')
+	{
+		count = print_base_x(va_arg(*args, unsigned int), get_base(f), f == 'X');
+	}
 	else if (f == '%')
+	{
 		count = _putchar('%');
+	}
 
 	return (count);
 }

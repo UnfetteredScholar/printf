@@ -5,13 +5,17 @@
 
 int _putchar(char c);
 
+unsigned int get_base(char f);
+
 int print_count_int(int n, int count);
 
 int print_int(int nu);
 
-int print_count_uint_binary(unsigned int n, int count);
+char get_hex_char(unsigned int n, int upper);
 
-int print_uint_binary(unsigned int n);
+int print_count_base_x(unsigned int n, unsigned int x, int count, int upper);
+
+int print_base_x(unsigned int n, unsigned int x, int upper);
 
 int _puts(char *s);
 
